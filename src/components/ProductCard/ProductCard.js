@@ -1,13 +1,13 @@
 import React from "react";
 
-export default function ProductCard({ image, title, price, text, onClick }) {
+export default function ProductCard({ image, title, price, onClick }) {
   return (
     <div className="bg-gray-100 w-full min-h-screen gap-4 flex-wrap flex justify-center items-center">
       <div className="w-60 px-6 bg-white rounded py-6 transform transition-all hover:translate-y-2">
         <img className="h-50 object-cover " src={image} alt="Product" />
         <div className="p-2"></div>
         <h2 className="font-bold text-lg ml-10"> {title} </h2>
-        <p className="text text-gray-600 text-center ">{text}</p>
+        {/* <p className="text text-gray-600 text-center ">{text}</p> */}
         <div className="m-2"></div>
         {/* <span className="flex items-center ml-23  mt-4 ">
           <img src={image} className="h-3 px-1 "></img>

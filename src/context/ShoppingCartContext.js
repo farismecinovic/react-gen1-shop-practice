@@ -1,20 +1,71 @@
 import React, { createContext, useState } from "react";
+import { toast } from "react-hot-toast";
 
 // create context
 const ShoppingCartContext = createContext();
 
 const ShoppingCartContextProvider = ({ children }) => {
-  // the value that will be given to the context
-  const [cartData, setCartData] = useState({
-    items: [],
-    total: 0,
-  });
+  const [cartItems, setCartItems] = useState([]);
 
-  const sayHello = () => {
-    alert("Hello");
+  const addToCart = (product) => {
+    setCartItems((prevItems) => {
+      if (!prevItems.find((el) => el.id === product.id)) {
+        return [...prevItems, { ...product, quantity: 1 }];
+      } else {
+        return prevItems.map((item) => {
+          if (item.id === product.id) {
+            return { ...item, quantity: item.quantity + 1 };
+          } else {
+            return item;
+          }
+        });
+      }
+    });
+
+    toast.success("Uspesno ste dodali artikal u korpu!");
   };
 
-  const values = { cartData, sayHello };
+  const removeFromCart = (id) => {
+    setCartItems((prev) => {
+      return prev.filter((el) => el.id !== id);
+    });
+  };
+
+  const increaseQuantity = (id) => {
+    setCartItems((prevItems) => {
+      return prevItems.map((item) => {
+        if (item.id === id) {
+          return { ...item, quantity: item.quantity + 1 };
+        } else {
+          return item;
+        }
+      });
+    });
+  };
+
+  const decreaseQuantity = (id) => {
+    setCartItems((prevItems) => {
+      if (prevItems.find((el) => el.quantity === 1)) {
+        removeFromCart(id);
+      }
+      return prevItems.map((item) => {
+        if (item.id === id) {
+          return { ...item, quantity: item.quantity - 1 };
+        } else {
+          return item;
+        }
+      });
+    });
+  };
+
+  const values = {
+    cartItems,
+    setCartItems,
+    addToCart,
+    removeFromCart,
+    increaseQuantity,
+    decreaseQuantity,
+  };
 
   return (
     // the Provider gives access to the context to its children

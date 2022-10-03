@@ -45,7 +45,7 @@ const ShoppingCartContextProvider = ({ children }) => {
 
   const decreaseQuantity = (id) => {
     setCartItems((prevItems) => {
-      if (prevItems.find((el) => el.quantity === 1)) {
+      if (prevItems.find((el) => el.id === id).quantity === 1) {
         removeFromCart(id);
       }
       return prevItems.map((item) => {

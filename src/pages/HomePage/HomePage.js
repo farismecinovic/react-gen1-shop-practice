@@ -20,11 +20,6 @@ export default function HomePage() {
         />
       </div>
 
-      <div className="flex items-center mt-10 justify-center border-4 w-1/6 h-12 border-sky-800 rounded-xl bg-sky-800  text-amber-50 ease-out duration-300 hover:bg-white hover:text-black">
-        <h3 className="font-serif text-xl font-extrabold ">
-          Najbolje u ponudi
-        </h3>
-      </div>
       <div className="flex justify-center items-center">
         {products.map((product) => (
           <ProductCard
